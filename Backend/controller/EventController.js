@@ -2,6 +2,7 @@
 const Event = require('../models/Event');
 
 const getAllEvents = async (req, res) => {
+  
   try {
     const events = await Event.find();
     res.status(200).json(events);
@@ -43,8 +44,9 @@ const addEvent = async (req, res) => {
 
 const deleteEvent = async (req, res) => {
   try {
-    const eventId = req.params.id;
-    await Event.findByIdAndDelete(eventId);
+    const eventName = req.params.id;
+    //await Event.findByIdAndDelete(eventName);
+    await Event.deleteOne({ event_name: eventName });
     res.status(200).json({ message: 'Event deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
@@ -54,12 +56,26 @@ const deleteEvent = async (req, res) => {
 const searchEventsByDate = async (req, res) => {
   try {
     const { date } = req.query;
-    const events = await Event.find({ date: { $gte: new Date(date) } });
+    let s = date.split("-")
+    //console.log(date,"date");
+    let date2 = new Date(Date.UTC(s[0], s[1] - 1, s[2]));
+    const events = await Event.find({ date: { $gte: date2, $lte: date2 } });
+    console.log(events);
+    if(events == []){
+      res.status(200).json({ message:"not found"});
+    }
+    // console.log(events)
     res.status(200).json(events);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+
+
+
+
 
 module.exports = {
   getAllEvents,

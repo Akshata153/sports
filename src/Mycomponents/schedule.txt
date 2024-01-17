@@ -26,9 +26,12 @@ const Schedule = ({ Keyprop }) => {
     try {
       const response = await axios.get('http://localhost:3000/events/all');
       // Filter events based on club_id
+      
       //const filteredEvents = response.data.filter((event) => event.club_id === '5');
+      //console.log(filteredEvents)
       //setEvents(filteredEvents);
       setEvents(response.data)
+      
     } catch (error) {
       console.error('Error fetching events:', error.message);
     }
@@ -38,7 +41,7 @@ const Schedule = ({ Keyprop }) => {
   const handleAddEvent = async () => {
    
     try {
-      await axios.post('/add', newEvent);
+      await axios.post('http://localhost:3000/events/add', newEvent);
       setNewEvent({
         event_name: '',
         club_id: '',
@@ -68,8 +71,7 @@ const Schedule = ({ Keyprop }) => {
 
   const handleSearchByDate = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/events/search?date=${searchDate}`);
-      console.log(searchDate,"datrer");
+      const response = await axios.get('http://localhost:3000/events/search?date=${searchDate}');
       console.log(response);
       if(response.data != null){
         setSearchedEvents(response.data);
@@ -82,6 +84,8 @@ const Schedule = ({ Keyprop }) => {
       console.error('Error searching events by date:', error.message);
     }
   };
+  
+  
 
   return (
     <div>
@@ -208,25 +212,29 @@ const Schedule = ({ Keyprop }) => {
           Search
         </button>
       </div>
-      <div>
-        <h2>Searched Events</h2>
-        <ul>
-          {searchedEvents.map((event) => (
-            <li key={event._id}>
-              {event.event_name} - {event.date}
-            </li>
-          ))}
-        </ul>
-      </div>
+
+
+      {searchedEvents.length > 0 ? (
+  <div>
+    <h2>Searched Events</h2>
+    <ul>
+      {searchedEvents.map((event) => (
+        <li key={event._id}>
+          {event.event_name} - {event.date}
+        </li>
+      ))}
+    </ul>
+  </div>
+) : (
+  <p>No events found for the selected date.</p>
+)}
 
               <div>
         <h2>All Events</h2>
-        
         <ul>
           {events.map((event) => (
             <li key={event._id}>
-              <p>{event.event_name} </p>
-              <p>{event.date}</p> 
+              {event.event_name} - {event.date}
             </li>
           ))}
         </ul>

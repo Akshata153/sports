@@ -39,7 +39,7 @@ const Result = ({ Keyprop }) => {
 
   const handleDeleteResult = async (eventName) => {
     try {
-      await axios.delete(`/results/${eventName}`);
+      await axios.delete(`http://localhost:3000/results/${eventName}`);
       fetchResults();
     } catch (error) {
       console.error('Error deleting result:', error.message);

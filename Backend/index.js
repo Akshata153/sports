@@ -22,7 +22,7 @@ app.use("/register", registrationRoutes);
 app.use("/events", eventRoutes);
 app.use("/results", resultRoutes);
 
-
+{/*}
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -50,15 +50,21 @@ async function run() {
 }
 run().catch(console.dir);
 
+*/}
+mongoose.connect(
+  uri,
+  { useNewUrlParser: true, useUnifiedTopology: true }
+)
+  .then(result => {
+      app.listen(3000)
+  })
+  .catch(err => {
+      console.log(err);
+  })
 
 
 
 
-
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 
 
