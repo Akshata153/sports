@@ -19,16 +19,16 @@ function App() {
       <Options title="Sports"/><hr/>
 
       <Routes>
-          <Route path="/schedule" element={<Schedule keyprop={key} />} />
-        </Routes>
+          <Route path="/schedule" element={<Schedule Keyprop={key} />} />
+        
 
-        <Routes>
-          <Route path="/result" element={<Results keyprop={key} />} />
-        </Routes>
+        
+          <Route path="/result" element={<Results Keyprop={key} />} />
+        
 
       
 
-        <Routes>
+        
           <Route path="/registration" element={<Registration />} />
         </Routes>
     </div>

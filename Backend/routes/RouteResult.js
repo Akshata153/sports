@@ -3,8 +3,8 @@ const router = express.Router();
 const resultController = require('../controller/ResultController');
 
 // Define your result routes here
-router.get('/results', resultController.getAllResults);
-router.post('/results', resultController.addResult);
-router.delete('/results/:eventName', resultController.deleteResult);
-
+router.get('/all', resultController.getAllResults);
+router.post('/add', resultController.addResult);
+router.delete('/:eventName', resultController.deleteResult);
+router.get('/',(req,res)=>{res.send("result")});
 module.exports = router;

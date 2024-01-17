@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Schedule = ({ keyProp }) => {
+const Schedule = ({ Keyprop }) => {
+  console.log(Keyprop)
   const [events, setEvents] = useState([]);
   const [newEvent, setNewEvent] = useState({
     event_name: '',
@@ -23,7 +24,7 @@ const Schedule = ({ keyProp }) => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('/events');
+      const response = await axios.get('http://localhost:3000/events/all');
       // Filter events based on club_id
       const filteredEvents = response.data.filter((event) => event.club_id === '5');
       setEvents(filteredEvents);
@@ -34,8 +35,9 @@ const Schedule = ({ keyProp }) => {
   
 
   const handleAddEvent = async () => {
+   
     try {
-      await axios.post('/events', newEvent);
+      await axios.post('/add', newEvent);
       setNewEvent({
         event_name: '',
         club_id: '',
@@ -50,11 +52,13 @@ const Schedule = ({ keyProp }) => {
     } catch (error) {
       console.error('Error adding event:', error.message);
     }
+
+
   };
 
   const handleDeleteEvent = async (eventName) => {
     try {
-      await axios.delete(`/events/${eventName}`);
+      await axios.delete(`http://localhost:3000/events/${eventName}`);
       fetchEvents();
     } catch (error) {
       console.error('Error deleting event:', error.message);
@@ -63,7 +67,7 @@ const Schedule = ({ keyProp }) => {
 
   const handleSearchByDate = async () => {
     try {
-      const response = await axios.get(`/events/search?date=${searchDate}`);
+      const response = await axios.get(`http://localhost:3000/events/search?date=${searchDate}`);
       // Filter searched events based on club_id
       const filteredSearchedEvents = response.data.filter((event) => event.club_id === '5');
       setSearchedEvents(filteredSearchedEvents);
@@ -75,12 +79,13 @@ const Schedule = ({ keyProp }) => {
   return (
     <div>
       <h1>Schedule</h1>
-        keyprop=1;
-      {keyProp == 1 && (
+        
+        
+      {Keyprop == 1 && (
         <div>
           <h2>Add Event</h2>
           <form>
-            
+            <div className='registration-container'>
             {/* Add input fields for each event property */}
             <label>
               Event Name:
@@ -166,6 +171,7 @@ const Schedule = ({ keyProp }) => {
             <button type="button" onClick={handleAddEvent}>
               Add Event
             </button>
+            </div>
           </form>
 
           <h2>All Events</h2>
@@ -182,8 +188,10 @@ const Schedule = ({ keyProp }) => {
         </div>
       )}
 
-      <h2>Search Events by Date</h2>
-      <div>
+      
+      
+      <div className='registration-container'>
+        <label>Search by date</label>
         <input
           type="date"
           value={searchDate}
@@ -194,7 +202,8 @@ const Schedule = ({ keyProp }) => {
         </button>
       </div>
 
-      <div>
+
+              <div>
         <h2>All Events</h2>
         <ul>
           {events.map((event) => (
@@ -204,7 +213,8 @@ const Schedule = ({ keyProp }) => {
           ))}
         </ul>
       </div>
-    </div>
+    </div> 
+      
   );
 };
 

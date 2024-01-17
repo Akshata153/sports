@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Result = ({ keyProp }) => {
+const Result = ({ Keyprop }) => {
   const [results, setResults] = useState([]);
   const [newResult, setNewResult] = useState({
     event_name: '',
@@ -16,7 +16,7 @@ const Result = ({ keyProp }) => {
 
   const fetchResults = async () => {
     try {
-      const response = await axios.get('/results');
+      const response = await axios.get('http://localhost:3000/results/all');
       setResults(response.data);
     } catch (error) {
       console.error('Error fetching results:', error.message);
@@ -25,7 +25,7 @@ const Result = ({ keyProp }) => {
 
   const handleAddResult = async () => {
     try {
-      await axios.post('/results', newResult);
+      await axios.post('http://localhost:3000/results/add', newResult);
       setNewResult({
         event_name: '',
         winner: '',
@@ -49,9 +49,10 @@ const Result = ({ keyProp }) => {
   return (
     <div>
       <h1>Results</h1>
-      {keyProp === 1 && (
-        <div>
+      {Keyprop === 1 && (
+        <div >
           <h2>Add Result</h2>
+          <div className='registration-container'>
           <form>
             <label>
               Event Name:
@@ -87,7 +88,7 @@ const Result = ({ keyProp }) => {
               Add Result
             </button>
           </form>
-
+        </div>
           <h2>All Results</h2>
           <ul>
             {results.map((result) => (

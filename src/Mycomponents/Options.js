@@ -27,17 +27,17 @@ function Options(props) {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item my-3">
-                  <Link to={"/schedule"}>
+                  <Link to={"/schedule"} className="nav-link">
                     Schedule
                   </Link>
                 </li>
                 <li className="nav-item my-3">
-                  <Link to={"/result"}>
+                  <Link to={"/result"} className="nav-link">
                     Results
                   </Link>
                 </li>
                 <li className="nav-item my-3">
-                  <Link to={"/registration"}>
+                  <Link to={"/registration"} className="nav-link">
                     Registration
                   </Link>
                 </li>

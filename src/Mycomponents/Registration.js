@@ -1,6 +1,8 @@
 // RegistrationForm.js
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import axios from "axios";
+import "./Registration.css";
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -20,12 +22,30 @@ const Registration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/register', formData);
+      console.log('entering to ')
+      await axios.post('http://localhost:3000/register/add', formData);
       console.log('Participant registered successfully');
       // You can redirect the user or show a success message here
     } catch (error) {
       console.error('Registration failed', error.message);
+      console.error('Full error object:', error);
       // Handle error, show error message to the user, etc.
+       // Check if the error response contains validation errors
+    
+      {/*
+       if (error.response && error.response.data && error.response.data.error) {
+        const validationErrors = error.response.data.error;
+        
+        // Display validation errors to the user
+        Object.keys(validationErrors).forEach(field => {
+          alert(`Validation Error: ${field} - ${validationErrors[field]}`);
+        });
+      } else {
+        // Handle other errors
+        // You might want to display a generic error message to the user
+        alert('An error occurred during registration. Please try again later.');
+      }*/}
+      
     }
   };
 
@@ -33,6 +53,7 @@ const Registration = () => {
     <div>
       <h1>Participant Registration</h1>
       <form onSubmit={handleSubmit}>
+      <div className='registration-container'>
         <label>
           Event Name:
           <input type="text" name="event_name" onChange={handleChange} required />
@@ -69,6 +90,7 @@ const Registration = () => {
         </label>
         <br />
         <button type="submit">Register</button>
+        </div>
       </form>
     </div>
   );

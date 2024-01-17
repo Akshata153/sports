@@ -1,4 +1,4 @@
-// controllers/registrationController.js
+//controllers/registrationController.js
 const Registration = require('../models/Registration');
 
 const registerParticipant = async (req, res) => {
@@ -22,14 +22,30 @@ const registerParticipant = async (req, res) => {
       contact,
       email,
     });
-
+    console.log(newParticipant,"regcontrol");
     await newParticipant.save();
     res.status(201).json({ message: 'Participant registered successfully' });
   } catch (error) {
+    console.error('Error during registration:', error);
     res.status(500).json({ error: 'Internal server error' });
+    {/*
+    if (error.name === 'ValidationError') {
+      // Handle Mongoose validation errors
+      const validationErrors = {};
+
+      // Iterate over the errors and populate validationErrors
+      Object.keys(error.errors).forEach(field => {
+        validationErrors[field] = error.errors[field].message;
+      });
+
+      res.status(400).json({ error: validationErrors });
+    } else {
+      res.status(500).json({ error: 'Internal server error' });
+    }*/}
   }
 };
 
 module.exports = {
   registerParticipant,
 };
+
