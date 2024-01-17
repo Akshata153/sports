@@ -2,6 +2,7 @@
 const Registration = require('../models/Registration');
 
 const registerParticipant = async (req, res) => {
+  console.log(req.body);
   try {
     const {
       event_name,

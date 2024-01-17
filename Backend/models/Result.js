@@ -6,6 +6,6 @@ const resultSchema = new mongoose.Schema({
   runner_up: { type: String, required: true },
 });
 
-const Result = mongoose.model('event result', resultSchema);
+const Result = mongoose.model('event_result', resultSchema);
 
 module.exports = Result;

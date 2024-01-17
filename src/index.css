@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+body {
+  background-color: #FFFFFF; /* White background */
+  color: #273238; /* Dark gray text */
+}
+
+.button {
+  background-color: #881426; /* Deep red button */
+  color: #FFFFFF; /* White text on the button */
+  /* Add any additional styling for buttons */
+}

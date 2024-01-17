@@ -17,6 +17,12 @@ app.use(cors());
 app.use(express.json());
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 
+app.get('/',(req,res)=>{res.send("hii")})
+app.use("/register", registrationRoutes);
+app.use("/events", eventRoutes);
+app.use("/results", resultRoutes);
+
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -49,11 +55,6 @@ run().catch(console.dir);
 
 
 
-
-app.get('/',(req,res)=>{res.send("hii")})
-app.use("/register", registrationRoutes);
-app.use("/events", eventRoutes);
-app.use("/results", resultRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

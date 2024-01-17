@@ -12,6 +12,6 @@ const eventSchema = new mongoose.Schema({
   venue: { type: String },
 });
 
-const Event = mongoose.model('Event_registration', eventSchema);
+const Event = mongoose.model('sports', eventSchema);
 
 module.exports = Event;

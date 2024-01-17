@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  
+}
+body {
+  background-color: #FFFFFF; /* White background */
+  color: #273238; /* Dark gray text */
+}
+
+.button {
+  background-color: #881426; /* Deep red button */
+  color: #FFFFFF; /* White text on the button */
+  /* Add any additional styling for buttons */
 }
 
 .App-logo {
