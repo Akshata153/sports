@@ -29,6 +29,7 @@ const Schedule = ({ Keyprop }) => {
       // Filter events based on club_id
       //const filteredEvents = response.data.filter((event) => event.club_id === '5');
       //setEvents(filteredEvents);
+      console.log(response.data)
       setEvents(response.data)
     } catch (error) {
       console.error('Error fetching events:', error.message);
@@ -86,7 +87,7 @@ const Schedule = ({ Keyprop }) => {
   
   return (
     <div>
-      <h1 classname="display-4">Schedule</h1>
+      <h1 className="display-4">Schedule</h1>
         
         
       {Keyprop == 1 && (
@@ -241,7 +242,7 @@ const Schedule = ({ Keyprop }) => {
         <h2>All Events</h2>
         
         <ul>
-        <table class="table table-striped-columns">
+        <table className="table table-striped-columns">
               <thead>
             <tr>
               <th>Eventname</th>
