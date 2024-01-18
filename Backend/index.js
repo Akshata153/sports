@@ -13,6 +13,7 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 //const uri ="mongodb+srv://root:root@cluster0.qbrivbz.mongodb.net/kletech_database";
 //const uri="mongodb+srv://root:root@cluster0.tmvovqw.mongodb.net/?retryWrites=true&w=majority"
 const uri="mongodb+srv://minip8681:kle123@cluster0.qbrivbz.mongodb.net/kletech_database"
+//const uri="mongodb://0.0.0.0:27017/"
 app.use(cors());
 app.use(express.json());
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version

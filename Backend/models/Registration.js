@@ -5,8 +5,8 @@ const registerSchema=new mongoose.Schema({
     domain_id: { type: Number},
      domain_name: { type: String },
     name:{ type: String,required:true},
-    usn:{ type: String,required:true,minlength:11,maxlength:12},
-    contact:{ type: Number,minlength:10,maxlength:10},
+    usn:{ type: String,required:true},
+    contact:{ type: Number},
     email:{ type: String,required:true}
 })
 

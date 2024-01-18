@@ -1,7 +1,8 @@
 // components/Schedule.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import './Schedule.css'
+import { format } from 'date-fns';
 const Schedule = ({ Keyprop }) => {
   console.log(Keyprop)
   const [events, setEvents] = useState([]);
@@ -38,7 +39,7 @@ const Schedule = ({ Keyprop }) => {
   const handleAddEvent = async () => {
    
     try {
-      await axios.post('/add', newEvent);
+      await axios.post('http://localhost:3000/events/add', newEvent);
       setNewEvent({
         event_name: '',
         club_id: '',
@@ -82,10 +83,10 @@ const Schedule = ({ Keyprop }) => {
       console.error('Error searching events by date:', error.message);
     }
   };
-
+  
   return (
     <div>
-      <h1>Schedule</h1>
+      <h1 classname="display-4">Schedule</h1>
         
         
       {Keyprop == 1 && (
@@ -180,24 +181,33 @@ const Schedule = ({ Keyprop }) => {
             </button>
             </div>
           </form>
-
+          <div style={{ textAlign: 'center' }}>
           <h2>All Events</h2>
           <ul>
             {events.map((event) => (
+              
               <li key={event._id}>
-                {event.event_name} - {event.date}{' '}
+                <table style={{ width: '60%' }} className='center'>
+                <tr><th>{event.event_name}</th> </tr>
+               <tr>{new Date(event.date).toLocaleDateString("en-GB")}</tr>
+               <tr>{event.event_description}</tr>
+              <tr>{event.venue}</tr>
                 <button type="button" onClick={() => handleDeleteEvent(event.event_name)}>
                   Delete
                 </button>
+                </table>
               </li>
+
             ))}
           </ul>
-        </div>
+              <hr></hr><br></br><br></br>
+        </div></div>
       )}
-
       
       
+      <h2>  Search Events</h2>
       <div className='registration-container'>
+      
         <label>Search by date</label>
         <input
           type="date"
@@ -208,28 +218,57 @@ const Schedule = ({ Keyprop }) => {
           Search
         </button>
       </div>
-      <div>
-        <h2>Searched Events</h2>
+      <div className='container-fluid'>
+      
         <ul>
           {searchedEvents.map((event) => (
             <li key={event._id}>
-              {event.event_name} - {event.date}
+              <table className='table'>
+              <tr><th>{event.event_name}</th> </tr>
+              
+               <tr>{new Date(event.date).toLocaleDateString("en-GB")}</tr>
+               <tr>{event.event_description}</tr>
+              <tr>{event.venue}</tr>
+              </table>
             </li>
           ))}
         </ul>
       </div>
-
+            <br/><br/><hr></hr>
               <div>
+   
+        <div className=' container-lg'>       
         <h2>All Events</h2>
         
         <ul>
+        <table class="table table-striped-columns">
+              <thead>
+            <tr>
+              <th>Eventname</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Venue</th>
+            </tr>
+            </thead>
+            <tbody>
           {events.map((event) => (
-            <li key={event._id}>
-              <p>{event.event_name} </p>
-              <p>{event.date}</p> 
-            </li>
+            
+            <tr key={event._id}>
+              
+              <td>{event.event_name} </td>
+              <td>{new Date(event.date).toLocaleDateString("en-GB")}</td> 
+              <td>{event.event_description}</td>
+              <td>{event.venue}</td>
+              
+             
+              
+            </tr>
+            
           ))}
+         </tbody>
+            </table>
         </ul>
+        </div> 
       </div>
     </div> 
       

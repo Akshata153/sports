@@ -1,0 +1,32 @@
+table, th, td {
+    border: 1px solid rgb(30, 1, 1);
+    border-collapse: collapse;
+    
+margin-left: auto;  
+margin-right: auto;  
+border-collapse: collapse;    
+width: 500px;  
+text-align: center; 
+  }
+  th, td {
+    background-color: #935d5e;
+  }
+  ul{
+    list-style-type: none;
+  }
+  h2,h3{
+    background-color:  #461213;
+    color:antiquewhite;
+    font-family: cursive;
+  }
+  h1{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #898989;
+    padding: 25px;
+    font: size 24px;
+  }
+
+  label{
+    font-family: Arial, Helvetica, sans-serif;
+    font: size 20px;
+  }

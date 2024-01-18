@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 const Result = ({ Keyprop }) => {
   const [results, setResults] = useState([]);
   const [newResult, setNewResult] = useState({
@@ -48,7 +49,7 @@ const Result = ({ Keyprop }) => {
 
   return (
     <div>
-      <h1>Results</h1>
+      <h1 classname="display-4">Results</h1>
       {Keyprop === 1 && (
         <div >
           <h2>Add Result</h2>
@@ -93,23 +94,43 @@ const Result = ({ Keyprop }) => {
           <ul>
             {results.map((result) => (
               <li key={result._id}>
-                {result.event_name} - Winner: {result.winner}, Runner-up: {result.runner_up}{' '}
+                <table style={{ width: '60%' }} className='center'>
+                <tr><th>{result.event_name}</th> </tr>
+            <tr>Winner:{result.winner}</tr>
+            <tr>Runner:{result.runner_up}</tr>
+                
                 <button type="button" onClick={() => handleDeleteResult(result.event_name)}>
                   Delete
                 </button>
+                </table>
               </li>
             ))}
           </ul>
+          <br></br><hr></hr><br></br>
         </div>
       )}
 
       <h2>All Results</h2>
       <ul>
+      <table class="table table-striped-columns">
+              <thead>
+            <tr>
+              <th>Resultname</th>
+              <th>Winner</th>
+              <th>Runner</th> 
+            </tr>
+            </thead>
+            <tbody>
         {results.map((result) => (
-          <li key={result._id}>
-            {result.event_name} - Winner: {result.winner}, Runner-up: {result.runner_up}
-          </li>
+
+          <tr key={result._id}>
+            <td>{result.event_name} </td>
+            <td>{result.winner}</td>
+            <td>{result.runner_up}</td>
+          </tr>
         ))}
+        </tbody>
+            </table>
       </ul>
     </div>
   );

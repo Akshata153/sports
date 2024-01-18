@@ -14,16 +14,59 @@ const Registration = () => {
     contact: '',
     email: '',
   });
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+    // Basic validation - check if required fields are filled
+    if (
+      formData.event_name.trim() === '' ||
+      formData.name.trim() === '' ||
+      formData.usn.trim() === '' ||
+      formData.contact.trim() === '' ||
+      formData.email.trim() === ''
+    ) {
+      alert('Please fill in all required fields');
+      return false;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      alert('Invalid email address');
+      return false;
+    }
+
+    // Validate USN length
+    if (formData.usn.length !== 12) {
+      alert('USN must be 12 characters long');
+      return false;
+    }
+
+    // Validate contact length
+    if (formData.contact.length !== 10) {
+      alert('Contact must be 10 characters long');
+      return false;
+    }
+
+    // Add more validation as needed
+
+    return true;
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
     try {
       console.log('entering to ')
       await axios.post('http://localhost:3000/register/add', formData);
+      alert('Submitted successfully')
       console.log('Participant registered successfully');
       // You can redirect the user or show a success message here
     } catch (error) {
@@ -61,12 +104,12 @@ const Registration = () => {
         <br />
         <label>
           Domain ID:
-          <input type="text" name="domain_id" onChange={handleChange} />
+          <input type="text" name="domain_id" onChange={handleChange} value="1" />
         </label>
         <br />
         <label>
           Domain Name:
-          <input type="text" name="domain_name" onChange={handleChange} />
+          <input type="text" name="domain_name" onChange={handleChange} value="CSE"/>
         </label>
         <br />
         <label>
@@ -81,7 +124,7 @@ const Registration = () => {
         <br />
         <label>
           Contact:
-          <input type="text" name="contact" onChange={handleChange} />
+          <input type="text" name="contact" onChange={handleChange} required/>
         </label>
         <br />
         <label>
